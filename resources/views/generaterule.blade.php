@@ -130,6 +130,7 @@ $arrc45 = array();
 $count = 1;
 $stringTree = $buildTree->toString('',$count,$arrc45); // Set to string
 dd($arrc45);
+//dd($stringTree);
 
 // echo "<pre>";
 // print_r ($arrayTree);
@@ -139,7 +140,6 @@ dd($arrc45);
 
 //untuk cetak tree visualisasi bisa lihat di sini lengkap dengan parent dan child
 //dd($buildTree);
-//dd($stringTree);
 
 
 ?>
