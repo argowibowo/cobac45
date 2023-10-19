@@ -129,7 +129,9 @@ $arrayTree = $buildTree->toArray(); // Set to array
 $arrc45 = array();
 $count = 1;
 $stringTree = $buildTree->toString('',$count,$arrc45); // Set to string
-dd($arrc45);
+
+// dd($ujikasus);
+//dd($arrc45);
 //dd($stringTree);
 
 // echo "<pre>";
@@ -141,6 +143,93 @@ dd($arrc45);
 //untuk cetak tree visualisasi bisa lihat di sini lengkap dengan parent dan child
 //dd($buildTree);
 
+// //=========================== membandingkan dengan data uji ====================
+// $arr_check = array();
+// //rule
+// foreach ($arrc45 as $key => $value) {
+//     //cek apakah semuanya cocok atau tidak per G-nya
+//     foreach ($ujikasus as $keykasus => $valuekasus) {
+//         $tmp_check = true;
+//         foreach ($value as $key2 => $value2) {
+//             $arr_explod = explode('=',$value2);
+//             //dicek ke kasus uji per rule nya
+//             if(!str_contains($arr_explod[0],'P')){
+//                 if(!str_contains($valuekasus['Gejala'],$arr_explod[0])){
+//                     $tmp_check = false;
+//                 }
+//             }
+//         }
+//         //jika ada yang benar 100%
+//         if($tmp_check){
+//             //$arr_check[$key] = $tmp_check;
+//             $arr_check[] = $key . " = " .$keykasus;
+//         }
+//     }
+// }
+
+// //=========================== membandingkan dengan data uji dan dihitung cacah kecocokannya ====================
+// $arr_check = array();
+// //rule
+// foreach ($arrc45 as $key => $value) {
+//     //cek apakah semuanya cocok atau tidak per G-nya
+//     foreach ($ujikasus as $keykasus => $valuekasus) {
+//         $tmp_check = true;
+//         $cacah = 0;
+//         foreach ($value as $key2 => $value2) {
+//             $arr_explod = explode('=',$value2);
+//             //dicek ke kasus uji per rule nya
+//             if(!str_contains($arr_explod[0],'P')){
+//                 if(!str_contains($valuekasus['Gejala'],$arr_explod[0])){
+//                     $tmp_check = false;
+//                 }else{
+//                     //jika ada yang true maka cacah bertambah
+//                     $cacah++;
+//                 }
+//             }
+//         }
+//         //jika ada yang benar 100%
+//         if($tmp_check){
+//             //explode ujikasus untuk hitung jumlah G di dalamnya
+//             $arr_explod_uji = explode(',',$valuekasus['Gejala']);
+//             //$arr_check[$key] = $tmp_check;
+//             $arr_check[] = $key . " = " .$keykasus. " tingkat kecocokan " .$cacah. "/".count($arr_explod_uji);
+//         }
+//     }
+// }
+
+//=========================== membandingkan dengan data uji dan dihitung cacah kecocokannya kondisi TRUE ====================
+$arr_check = array();
+//rule
+foreach ($arrc45 as $key => $value) {
+    //cek apakah semuanya cocok atau tidak per G-nya
+    foreach ($ujikasus as $keykasus => $valuekasus) {
+        $tmp_check = true;
+        $cacah = 0;
+        foreach ($value as $key2 => $value2) {
+            $arr_explod = explode('=',$value2);
+            //dicek ke kasus uji per rule nya
+            if(!str_contains($arr_explod[0],'P')){
+                if($arr_explod[1] == "True"){
+                    if(!str_contains($valuekasus['Gejala'],$arr_explod[0])){
+                        $tmp_check = false;
+                    }else{
+                        //jika ada yang true maka cacah bertambah
+                        $cacah++;
+                    }
+                }
+            }
+        }
+        //jika ada yang benar 100%
+        if($tmp_check){
+            //explode ujikasus untuk hitung jumlah G di dalamnya
+            $arr_explod_uji = explode(',',$valuekasus['Gejala']);
+            //$arr_check[$key] = $tmp_check;
+            $arr_check[] = $key . " = " .$keykasus. " tingkat kecocokan " .$cacah. "/".count($arr_explod_uji);
+        }
+    }
+}
+
+dd($arr_check);
 
 ?>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
